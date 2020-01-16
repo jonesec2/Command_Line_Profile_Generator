@@ -23,7 +23,6 @@
   "homepage": "https://github.com/jonesec2/Command_Line_Profile_Generator#readme",
   "dependencies": {
     "axios": "^0.19.1",
-    "color-namer": "^1.4.0",
     "fs": "0.0.1-security",
     "inquirer": "^7.0.3"
   }
