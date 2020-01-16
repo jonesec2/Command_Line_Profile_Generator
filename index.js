@@ -1,16 +1,31 @@
 const fs = require("fs");
 const axios = require("axios");
 const inquirer = require("inquirer");
+// const namer = require('color-namer')
+// var names = namer(color, { pick: ['basic', 'x11'] })
+
+// let test = names(red)
+// console.log(test)
+
+
 
 inquirer
-    .prompt({
-        message: "Enter your GitHub username",
-        name: "username",
-    })
+    .prompt([ 
+        {
+            message: "Enter your GitHub username",
+            name: "username"
+        },
+        {
+            message: "Pick your favorite color",
+            name: "color"
+        }
+    ])
 
-    .then(function ({ username }) {
+    .then(function ({ username, color }) {
         const repoQuery = `https://api.github.com/users/${username}/repos?per_page=100`;
         const userQuery = `https://api.github.com/users/${username}`;
+        console.log(`<div style='color:${color}'>hey<div>`)
+
 
         axios.get(userQuery).then(function (res) {
 
@@ -51,11 +66,5 @@ inquirer
             //template literals into pdf go here
             const displayName = /*html*/ `${name}`
         })
+    
     })
-    // prompt({
-    //     message: "Pick your favorite color",
-    //     chosenColor:  "color"
-    // })
-    // .then(function ({ color }) {
-    //     const useColor = color
-    // })
