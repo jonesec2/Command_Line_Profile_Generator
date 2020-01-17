@@ -1,10 +1,8 @@
 const fs = require("fs");
 const axios = require("axios");
 const inquirer = require("inquirer");
-// const namer = require('color-namer')
-// var names = namer(color, { pick: ['basic', 'x11'] })
 
-// let test = names(red)
+
 // console.log(test)
 
 
@@ -22,12 +20,11 @@ inquirer
     ])
 
     .then(function ({ username, color }) {
-        const repoQuery = `https://api.github.com/users/${username}/repos?per_page=100`;
-        const userQuery = `https://api.github.com/users/${username}`;
-        console.log(`<div style='color:${color}'>hey<div>`)
+
+        console.log(`<div style='background-color:${color}'>hey<div>`)
 
 
-        axios.get(userQuery).then(function (res) {
+        axios.get(`https://api.github.com/users/${username}`).then(function (res) {
 
             const picture = res.data.avatar_url;
             const name = res.data.name;
@@ -39,8 +36,9 @@ inquirer
             const followers = res.data.followers;
             const following = res.data.following;
             console.log(picture)
+            console.log(location)
 
-            axios.get(repoQuery).then(function (res) {
+            axios.get(`https://api.github.com/users/${username}/repos?per_page=100`).then(function (res) {
 
                 // gets the number of stars for each repo
                 // condenses the array into a single total of stars
@@ -64,7 +62,11 @@ inquirer
             });
 
             //template literals into pdf go here
-            const displayName = /*html*/ `${name}`
+            const displayName = /*html*/ `
+            <h1>${name}</h1>
+            <a href="https://www.google.com/maps/place/${location.split(' ').join(',%20')}"class='location fa-fal-icon'>${location}</a>
+            `
+            console.log(displayName)
         })
     
     })
